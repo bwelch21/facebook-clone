@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">PictureMe</string>
     <string name="brandt">Brandt</string>
+    <string name="brandt_welch">Brandt Welch</string>
+    <string name="edit_profile_button_text">EDIT PROFILE</string>
+    <string name="dummy_body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="profile_icon_content_description">Profile icon</string>
 </resources>

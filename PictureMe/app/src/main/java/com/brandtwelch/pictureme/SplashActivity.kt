@@ -4,9 +4,17 @@ import android.app.Activity
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.room.Room
+import com.brandtwelch.pictureme.db.KnowMeDatabase
+import com.brandtwelch.pictureme.userprofile.UserProfileActivity
 import kotlinx.coroutines.*
 
 class SplashActivity : Activity() {
+
+    companion object {
+        @JvmStatic
+        private var db: KnowMeDatabase? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,16 +31,26 @@ class SplashActivity : Activity() {
 
     private fun loadData() = CoroutineScope(Dispatchers.Main).launch {
 
-        val output = withContext(Dispatchers.IO) {
-            Thread.sleep(3 * 1000)
-            true
-        }
 
-        if (output) {
-            val intent = KnowMeActivity.getLaunchIntent(baseContext)
+        val isGetDataSuccess = mockGetData()
+
+        db = Room.databaseBuilder(
+            applicationContext,
+            KnowMeDatabase::class.java,
+            "know-me"
+        ).build()
+
+        if (isGetDataSuccess) {
+            val intent = UserProfileActivity.getLaunchIntent(baseContext)
             startActivity(intent)
         }
     }
+
+    private suspend fun mockGetData(): Boolean {
+        delay(3 * 1000)
+        return true
+    }
+
 
     private fun showLoading() {
 

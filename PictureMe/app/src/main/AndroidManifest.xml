@@ -9,9 +9,10 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".KnowMeActivity">
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            tools:ignore="GoogleAppIndexingWarning"
+            >
+        <activity android:name=".userprofile.UserProfileActivity">
         </activity>
         <activity android:name=".SplashActivity">
             <intent-filter>
