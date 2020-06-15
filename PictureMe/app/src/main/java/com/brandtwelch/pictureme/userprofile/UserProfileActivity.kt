@@ -26,9 +26,6 @@ class UserProfileActivity : AppCompatActivity(), MviView {
 
     private lateinit var profileNameView: TextView
     private lateinit var editProfileButton: Button
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
-    private lateinit var viewManager: RecyclerView.LayoutManager
 
     companion object {
         @JvmStatic
@@ -44,8 +41,8 @@ class UserProfileActivity : AppCompatActivity(), MviView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user_profile_layout)
         bindViews()
+        addTimelineFragment()
         setOnClickListeners()
-        builFeed()
 
         viewModel = ViewModelProvider(this,
             ViewModelProvider.NewInstanceFactory()).get(UserProfileViewModel::class.java)
@@ -67,28 +64,10 @@ class UserProfileActivity : AppCompatActivity(), MviView {
         editProfileButton = findViewById(R.id.edit_profile_button)
     }
 
-    private fun builFeed() {
-        recyclerView = findViewById<RecyclerView>(R.id.user_feed_recycler_view).apply {
-            setHasFixedSize(true)
-            layoutManager = LinearLayoutManager(this@UserProfileActivity)
-            adapter = FeedAdapter(generateDummyPosts())
-        }
-    }
-
-    private fun generateDummyPosts(): ArrayList<Post> {
-        val posts = arrayListOf<Post>()
-
-        for (i in 0..10) {
-            val post = Post(
-                id = i,
-                originalPosterId = i,
-                timestamp = Timestamp.valueOf("2020-10-21 19:11:01"),
-                postBody = resources.getString(R.string.dummy_body)
-            )
-            posts.add(post)
-        }
-
-        return posts
+    private fun addTimelineFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.timeline_placeholder, UserProfileFragment.newInstance())
+        fragmentTransaction.commit()
     }
 
     private fun setOnClickListeners() {
